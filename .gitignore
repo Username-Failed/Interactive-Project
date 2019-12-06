@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/InteractiveGame/[Ll]ibrary/
-/InteractiveGame/[Tt]emp/
-/InteractiveGame/[Oo]bj/
-/InteractiveGame/[Bb]uild/
-/InteractiveGame/[Bb]uilds/
-/InteractiveGame/[Ll]ogs/
-/InteractiveGame/[Mm]emoryCaptures/
+InteractiveGame/[Ll]ibrary/
+InteractiveGame/[Tt]emp/
+InteractiveGame/[Oo]bj/
+InteractiveGame/[Bb]uild/
+InteractiveGame/[Bb]uilds/
+InteractiveGame/[Ll]ogs/
+InteractiveGame/[Mm]emoryCaptures/
 
 # Never ignore Asset meta data
 !/InteractiveGame/[Aa]ssets/**/*.meta
