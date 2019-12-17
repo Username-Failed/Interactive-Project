@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2951550858451260543}
   m_Layer: 9
   m_Name: DoorL
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2951550858666199126}
   m_Layer: 9
   m_Name: DoorR
-  m_TagString: Untagged
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   closed: 1
-  speed: 1
+  speed: 5
 --- !u!1 &2951550858827364562
 GameObject:
   m_ObjectHideFlags: 0

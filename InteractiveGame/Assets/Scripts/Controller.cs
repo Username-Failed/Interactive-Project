@@ -13,9 +13,12 @@ public class Controller : MonoBehaviour {
 	//bevægelse
 	public float acceleration, jumpSpeed;
 
+	// Maximal stråle distance for håndtags-tjek
+	public float maxRayDistance;
+
 	// Start er kaldet før første update frame 
 	void Start() {
-		//setter verdier
+		//sætter værdier
 		rb = GetComponent<Rigidbody>();
 
 		onGround = true;
@@ -53,9 +56,28 @@ public class Controller : MonoBehaviour {
 
 		//sikre at man max kan kigge lige op og minimum lige ned
 		if(xRotation > 90) xRotation = 90; //up
-		if(xRotation < -90) xRotation = -90; //nde
+		if(xRotation < -90) xRotation = -90; //ned
 
-		cam.transform.eulerAngles = new Vector3(xRotation, yRotation); //setter rotationen
+		cam.transform.eulerAngles = new Vector3(xRotation, yRotation); //sætter rotationen
+
+		/*
+		 * Følgende kode er inspiret af unitys scripting manual:
+		 * https://docs.unity3d.com/ScriptReference/Physics.Raycast.html
+		 */
+
+		// Lav variable 'hit'
+		RaycastHit hit;
+
+		// Generere en lag-maske sådan at spilleren bliver ignoret
+		int layerMask = 1 << 8;
+		layerMask = ~layerMask;
+
+		// Tjek om spilleren kigger på et håndtag
+		if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(transform.forward), out hit, maxRayDistance, layerMask)) {
+			if(hit.transform.gameObject.CompareTag("Lever") && Input.GetMouseButtonDown(0)) { // Hvis det er et håndtag spilleren kigger på og han klikker på venstre muse-knap
+				hit.transform.gameObject.GetComponent<Gates>().output = !hit.transform.gameObject.GetComponent<Gates>().output; // Ændre håndtagets output til det modsatte af hvad det var
+			}
+		}
 	}
 
 	private void OnTriggerEnter(Collider other) {
