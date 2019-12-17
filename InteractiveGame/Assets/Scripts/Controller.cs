@@ -38,15 +38,6 @@ public class Controller : MonoBehaviour {
 		worldDir.y = 0; //sikre at man ikke kan kan flyve opad
 		rb.velocity += worldDir.normalized * acceleration * Time.deltaTime; //tilføg bevegelse
 
-		//hop
-		if(Input.GetKey("space") && onGround) {
-			rb.velocity += new Vector3(0, jumpSpeed * Time.deltaTime, 0);
-			onGround = false;
-		}
-
-		//hop mindre
-		if(!Input.GetKey("space") && rb.velocity.y > 0) rb.velocity -= new Vector3(0, rb.velocity.y / 3f, 0);
-
 		//camera rotationen
 		xRotation -= xRotationSpeed * Input.GetAxis("Mouse Y");
 		yRotation += yRotationSpeed * Input.GetAxis("Mouse X");
