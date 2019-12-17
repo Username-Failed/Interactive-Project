@@ -20,8 +20,6 @@ public class Controller : MonoBehaviour {
 		//sætter værdier
 		rb = GetComponent<Rigidbody>();
 
-		onGround = true;
-
 		xRotation = 0.0f;
 		yRotation = 0.0f;
 	}
@@ -68,9 +66,5 @@ public class Controller : MonoBehaviour {
 				hit.transform.gameObject.GetComponent<Gates>().output = !hit.transform.gameObject.GetComponent<Gates>().output; // Ændre håndtagets output til det modsatte af hvad det var
 			}
 		}
-	}
-
-	private void OnTriggerEnter(Collider other) {
-		onGround = true;
 	}
 }
