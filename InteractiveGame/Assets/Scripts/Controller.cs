@@ -4,7 +4,6 @@ public class Controller : MonoBehaviour {
 	//variabler
 	private Rigidbody rb;
 	public Camera cam;
-	private bool onGround;
 
 	//camera rotation
 	public float xRotationSpeed, yRotationSpeed;
