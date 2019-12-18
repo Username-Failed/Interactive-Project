@@ -3,18 +3,21 @@ using UnityEngine;
 
 public class OpenDoors : MonoBehaviour {
 
-	//fields
+	// Variabler
 	private Vector3 startPosL, startPosR;
 	private GameObject doorL;
 	private GameObject doorR;
+
+	public GameObject gInput;
 
 	public bool closed;
 	private bool last, change;
 
 	public float speed;
 
-	// Start is called before the first frame update
+	// Start kaldes ved første frame
 	void Start() {
+
 		//sætter variabler
 		last = closed = true;
 
@@ -26,8 +29,13 @@ public class OpenDoors : MonoBehaviour {
 		startPosR = doorR.transform.position;
 	}
 
-	// Update is called once per frame
+	// Update kaldes ved hver frame
 	void Update() {
+		if(gInput != null) { // Hvis gInput findes
+			closed = !gInput.gameObject.GetComponent<Gates>().output; // Sæt input til det modsatte af gInputs output
+		} else { // Ellers sæt closed til true
+			closed = true;
+		}
 
 		//checker for om der er en ændring
 		if(closed != last) {

@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Gates : MonoBehaviour {
 	// Gatetype Variabler
-	public enum GateType {And, Or, Not, Nand, Nor, Xor, Lever};
+	public enum GateType { And, Or, Not, Nand, Nor, Xor, Lever };
 	public GateType gateType;
 
 	[Header("Inputs")]
@@ -20,42 +19,45 @@ public class Gates : MonoBehaviour {
 
 	// Start bliver kaldt ved første frame (Billede)
 	void Start() {
-		if (gInput1 != null && gInput2 != null) { // Hvis begge inputs er sat.
-			input1 = gInput1.GetComponent<Gates>().output; input2 = gInput2.GetComponent<Gates>().output; // Sætter gInputs output som vores input
-		} else if (gateType == GateType.Not && gInput1 != null) { // Hvis det er en not skal der kun et input til
-			input1 = gInput1.GetComponent<Gates>().output; // Sætter gInput1's output som input
-		} else { // Hvis ikke at nogen inputs er sat, gør begge input falske.
-			input1 = input2 = false;
-		}
+		
 	}
 
 	// Update kaldes ved hver frame (Billede)
 	void Update() {
-		switch (gateType) { // Tjek igennem alle gate-muligheder og sæt output i forhold til.
-			case GateType.And:
-				output = (input1 && input2);
-				break;
-			case GateType.Or:
-				output = (input1 || input2);
-				break;
-			case GateType.Not:
-				output = !input1;
-				break;
-			case GateType.Xor:
-				output = (input1 ^ input2);
-				break;
-			case GateType.Nand:
-				output = !(input1 && input2);
-				break;
-			case GateType.Nor:
-				output = !(input1 || input2);
-				break;
-			case GateType.Lever:
-				break;
-			default:
-				Debug.Log("Error: Gate type not set at gameobject " + this.gameObject.ToString());
-				output = false;
-				break;
+
+		if(gInput1 != null && gInput2 != null) { // Hvis begge inputs er sat.
+			input1 = gInput1.GetComponent<Gates>().output; input2 = gInput2.GetComponent<Gates>().output; // Sætter gInputs output som vores input
+		} else if(gateType == GateType.Not && gInput1 != null) { // Hvis det er en not skal der kun et input til
+			input1 = gInput1.GetComponent<Gates>().output; // Sætter gInput1's output som input
+		} else { // Hvis ikke at nogen inputs er sat, gør begge input falske.
+			input1 = input2 = false;
+		}
+
+		if(gateType != GateType.Lever) { // Hvis det er en Logic gate og ikke et håndtag, fortsæt.
+			switch(gateType) { // Tjek igennem alle gate-muligheder og sæt output i forhold til.
+				case GateType.And:
+					output = (input1 && input2);
+					break;
+				case GateType.Or:
+					output = (input1 || input2);
+					break;
+				case GateType.Not:
+					output = !input1;
+					break;
+				case GateType.Xor:
+					output = (input1 ^ input2);
+					break;
+				case GateType.Nand:
+					output = !(input1 && input2);
+					break;
+				case GateType.Nor:
+					output = !(input1 || input2);
+					break;
+				default:
+					Debug.LogError("Gatetype er ikke valgt");
+					output = false;
+					break;
+			}
 		}
 	}
 }

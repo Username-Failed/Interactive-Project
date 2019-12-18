@@ -47,7 +47,9 @@ public class Controller : MonoBehaviour {
 		if(xRotation < -90) xRotation = -90; //ned
 
 		cam.transform.eulerAngles = new Vector3(xRotation, yRotation); //sætter rotationen
+	}
 
+	void FixedUpdate() {
 		/*
 		 * Følgende kode er inspiret af unitys scripting manual:
 		 * https://docs.unity3d.com/ScriptReference/Physics.Raycast.html
@@ -56,15 +58,14 @@ public class Controller : MonoBehaviour {
 		// Lav variable 'hit'
 		RaycastHit hit;
 
-		// Generere en lag-maske sådan at spilleren bliver ignoret
-		int layerMask = 1 << 8;
-		layerMask = ~layerMask;
-
 		// Tjek om spilleren kigger på et håndtag
-		if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(transform.forward), out hit, maxRayDistance, layerMask)) {
+		if(Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit, maxRayDistance)) {
 			if(hit.transform.gameObject.CompareTag("Lever") && Input.GetMouseButtonDown(0)) { // Hvis det er et håndtag spilleren kigger på og han klikker på venstre muse-knap
 				hit.transform.gameObject.GetComponent<Gates>().output = !hit.transform.gameObject.GetComponent<Gates>().output; // Ændre håndtagets output til det modsatte af hvad det var
+																																//Debug.Log("Click");
 			}
+			//Debug.DrawRay(cam.transform.position,cam.transform.TransformDirection(Vector3.forward), Color.red);
+			//Debug.Log(hit.transform.gameObject.name + "  " + hit.transform.gameObject.tag);
 		}
 	}
 }
